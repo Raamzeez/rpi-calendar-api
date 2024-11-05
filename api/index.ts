@@ -41,17 +41,6 @@ app.get("/getEvents", async (_, res) => {
 app.get("/scrapeEvents", async (_, res) => {
   try {
     const scrapedEvents = await fetchEvents();
-    const data = JSON.stringify(scrapedEvents, null, 2);
-
-    const params = {
-      Bucket: "rpicalendarevents",
-      Key: "events.json",
-      Body: data,
-      ContentType: "application/json",
-    };
-
-    await s3.putObject(params).promise();
-
     res.send(scrapedEvents);
   } catch (error) {
     console.error("Error writing to S3:", error);
