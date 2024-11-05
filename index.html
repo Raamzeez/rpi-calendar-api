@@ -9,9 +9,9 @@
     <script src="https://cdn.tailwindcss.com"></script>
   </head>
   <body>
-    <div class="max-w-screen min-h-screen px-8 py-4 flex flex-col items-center bg-blue-100">
+    <div class="max-w-screen min-h-screen px-8 py-4 flex flex-col items-center bg-blue-100 px-2 sm:px-12 md:px-24">
       <h1 class="font-semibold text-3xl">RPI Calendar Scraper v1.0</h1>
-      <div class="mt-24 w-full px-24">
+      <div class="mt-24 w-full">
         <code>Event JSON Example</code>
          <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
 <code>{
@@ -20,7 +20,7 @@
   "description": "Late Degree application (paper) for December 2024 graduation, if did not apply in SIS, will begin being accepted."
 }</code></pre>
       </div>
-            <div class="mt-12 w-full px-24">
+            <div class="mt-12 w-full">
         <code>Event JSON Type</code>
          <pre class="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
 <code>{
@@ -29,28 +29,54 @@
   "description": string
 }</code></pre>
       </div>
-      <div class="mt-24 w-full px-24">
-        <table class="w-full border-collapse border border-gray-700">
-            <thead>
-            <tr>
-                <th class="font-semibold text-2xl p-4 border border-gray-700">API Endpoints</th>
-                <th class="font-semibold text-2xl p-4 border border-gray-700">Return Type</th>
-                <th class="font-semibold text-2xl p-4 border border-gray-700">Description</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td class="p-4 border border-gray-700"><code>/getEvents</code></td>
-                <td class="p-4 border border-gray-700"><code>Event[]</code></td>
-                <td class="p-4 border border-gray-700"><code>Returns an array of all events on the school calendar (latest academic year) <br /><br /><span class="font-semibold text-gray-700 text-sm">Note: Uses cached result on the server that is updated by a scraper at least once a day at midnight. Up to 5x quicker response times</span></code></td>
-            </tr>
-             <tr>
-                <td class="p-4 border border-gray-700"><code>/scrapeEvents</code></td>
-                <td class="p-4 border border-gray-700"><code>Event[]</code></td>
-                <td class="p-4 border border-gray-700"><code>Returns an array of all events on the school calendar (latest academic year) <br /><br /><span class="font-semibold text-gray-700 text-sm">Note: Scrapes <a>https://registrar.rpi.edu/academic-calendar</a> in real-time and then returns a response. Much slower, but also returns the most up to date information. <span class="text-red-600">Not generally recommended.</span></span></code></td>
-            </tr>
-            </tbody>
-        </table>
+      <div class="mt-24 w-full">
+        <div class="overflow-x-auto">
+       <table class="table-auto border-collapse border border-gray-700">
+    <thead class="hidden md:table-header-group">
+        <tr>
+            <th class="font-semibold text-2xl p-4 border border-gray-700">API Endpoints</th>
+            <th class="font-semibold text-2xl p-4 border border-gray-700">Return Type</th>
+            <th class="font-semibold text-2xl p-4 border border-gray-700">Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="block md:table-row mb-4 md:mb-0">
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['API Endpoints:'] before:font-semibold before:block md:before:hidden">
+                <code>/getEvents</code>
+            </td>
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['Return Type:'] before:font-semibold before:block md:before:hidden">
+                <code>Event[]</code>
+            </td>
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['Description:'] before:font-semibold before:block md:before:hidden">
+                <code>
+                    Returns an array of all events on the school calendar (latest academic year) <br /><br />
+                    <span class="font-semibold text-gray-700 text-sm">
+                        Note: Uses cached result on the server that is updated by a scraper at least once a day at midnight. Up to 5x quicker response times
+                    </span>
+                </code>
+            </td>
+        </tr>
+        <tr class="block md:table-row mb-4 md:mb-0">
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['API Endpoints:'] before:font-semibold before:block md:before:hidden">
+                <code>/scrapeEvents</code>
+            </td>
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['Return Type:'] before:font-semibold before:block md:before:hidden">
+                <code>Event[]</code>
+            </td>
+            <td class="p-4 border border-gray-700 block md:table-cell before:content-['Description:'] before:font-semibold before:block md:before:hidden">
+                <code>
+                    Returns an array of all events on the school calendar (latest academic year) <br /><br />
+                    <span class="font-semibold text-gray-700 text-sm">
+                        Note: Scrapes <a href="https://registrar.rpi.edu/academic-calendar" class="text-blue-600 underline">https://registrar.rpi.edu/academic-calendar</a> in real-time and then returns a response. Much slower, but also returns the most up-to-date information.
+                        <span class="text-red-600">Not generally recommended.</span>
+                    </span>
+                </code>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+
         </div>
       </div>
     </div>
