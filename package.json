@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon --exec ts-node api/index.ts",
-    "fetch": "ts-node fetchEvents.ts"
+    "start": "nodemon --exec ts-node api/index.ts"
   },
   "keywords": [],
   "author": "",
