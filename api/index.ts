@@ -1,21 +1,38 @@
+import dotenv from "dotenv";
+dotenv.config();
 import express from "express";
-import path from "path";
-import fs from "fs";
 import fetchEvents from "../fetchEvents";
 import helmet from "helmet";
+import AWS from "aws-sdk";
 
 const app = express();
 app.use(helmet());
+
+AWS.config.update({
+  region: process.env.AWS_REGION,
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+});
+const s3 = new AWS.S3();
 
 app.get("/", (_, res) => {
   res.send("./index.html");
 });
 
-app.get("/getEvents", (_, res) => {
+app.get("/getEvents", async (_, res) => {
   try {
-    const data = fs.readFileSync(path.join("/tmp", "events.json"), "utf8");
-    const events = JSON.parse(data);
-    res.json(events);
+    const params = {
+      Bucket: "rpicalendarevents",
+      Key: "events.json",
+    };
+    const data = await s3.getObject(params).promise();
+
+    if (data.Body) {
+      const events = JSON.parse(data.Body.toString("utf-8"));
+      res.json(events);
+    } else {
+      res.status(500).send("File content is empty.");
+    }
   } catch (error) {
     res.status(500).send("Failed to load events");
   }
@@ -25,9 +42,19 @@ app.get("/scrapeEvents", async (_, res) => {
   try {
     const scrapedEvents = await fetchEvents();
     const data = JSON.stringify(scrapedEvents, null, 2);
-    fs.writeFileSync(path.join("/tmp", "events.json"), data, "utf8"); // Save to /tmp, Vercel's writable area
+
+    const params = {
+      Bucket: "rpicalendarevents",
+      Key: "events.json",
+      Body: data,
+      ContentType: "application/json",
+    };
+
+    await s3.putObject(params).promise();
+
     res.send(scrapedEvents);
   } catch (error) {
+    console.error("Error writing to S3:", error);
     res.status(500).send("Failed to scrape events");
   }
 });
