@@ -42,13 +42,21 @@ An API for retrieving all events on the Rensselaer Polytechnic Institute (RPI) a
    cd rpi-calendar-scraper
    npm install
 
-2. **Running the Server:** Start the server to make the API endpoints available.
+2. **Add Environment Variables:** Create a ```.env``` file in the root directory and supply the credentials
+
+   ```bash
+   AWS_ACCESS_KEY_ID=
+   AWS_SECRET_ACCESS_KEY=
+   AWS_REGION=
+   ```
+
+3. **Running the Server:** Start the server to make the API endpoints available.
 
    ```bash
    npm run start
    ```
    
-3. **Accessing the API:** Once the server is running, you can access the following endpoints:
+4. **Accessing the API:** Once the server is running, you can access the following endpoints:
 
    - **`/getEvents`**: Returns cached events for quicker response times.
    - **`/scrapeEvents`**: Performs a real-time scrape for the most up-to-date events.
