@@ -29,11 +29,6 @@ An API for retrieving all events on the Rensselaer Polytechnic Institute (RPI) a
 - **Description:** Returns an array of all events on the school calendar for the latest academic year.
 - **Notes:** Uses a cached result on the server, which is updated at least once daily at midnight. This provides response times up to 5x faster than real-time scraping.
 
-### `/scrapeEvents`
-- **Return Type:** `Event[]`
-- **Description:** Returns an array of all events on the school calendar for the latest academic year by performing a real-time scrape.
-- **Notes:** Scrapes [RPI Academic Calendar](https://registrar.rpi.edu/academic-calendar) directly. Slower response time due to real-time data retrieval, but returns the most up-to-date information. Not generally recommended for frequent use.
-
 ## Setup and Usage
 
 1. **Installation:** Clone the repository and install dependencies:
