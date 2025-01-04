@@ -54,7 +54,6 @@ An API for retrieving all events on the Rensselaer Polytechnic Institute (RPI) a
 4. **Accessing the API:** Once the server is running, you can access the following endpoints:
 
    - **`/getEvents`**: Returns cached events for quicker response times.
-   - **`/scrapeEvents`**: Performs a real-time scrape for the most up-to-date events.
 
    Use these endpoints by sending a GET request to the server's URL followed by the endpoint path.
 
